@@ -1,0 +1,35 @@
+html, body {
+  font-family:'Roboto', '黑體-繁', '微軟正黑體', sans-serif;
+  font-size: 16px;
+  background: #E3DFC8;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.google_map {
+	height: 600px;
+}
+#map-canvas {
+	height: 100%;
+	width: 100%;
+}
+#map_top {
+	padding-top: 100px;
+}
+
+a, .title, p {
+  font-family:'Roboto', '黑體-繁', '微軟正黑體', sans-serif !important;
+  color: #808C6C !important;
+}
+.row {
+  text-align:center;
+}
+#plan .content p{
+  text-align: justify;
+}
+.down.icon {
+  color: #808C6C !important;
+}
+/*#F5F1DA*/
+/*#808C6C*/
+/*#FDAC61*/

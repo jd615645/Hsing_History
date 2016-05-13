@@ -2,20 +2,19 @@ function initMap() {
   var sheet_src = '1nDYnBptHmyxWQyxQb-5aiBJemoGYiKtqEeH18O6vjuE';
   var url = 'https://spreadsheets.google.com/feeds/list/' + sheet_src + '/1/public/values?alt=json';
 
-  var map = new google.maps.Map(document.getElementById('map'), {
+  var markers = [];
+  var map = new google.maps.Map(document.getElementById('map-canvas'), {
     center: {lat: 24.121468, lng: 120.675867},
-    zoom: 17
+    zoom: 17,
+    disableDefaultUI: true,
   });
+  var history_details = [];
+  var plan_place = [[4, 6, 10, 0, 1], [1, 2, 3, 0, 5], [4, 6, 10, 0, 1]];
+  var last_marker;
 
   $.getJSON(url, function(data) {
+
     var input = data.feed.entry;
-    var markers = [];
-    var map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 24.121468, lng: 120.675867},
-      zoom: 17
-    });
-    var history_details = [];
-    var last_marker;
 
     input.forEach(function(input_data, i){
       var lat = Number(input_data['gsx$lat']['$t']),
@@ -39,22 +38,123 @@ function initMap() {
 
     markers.forEach(function(marker, i){
 			marker.addListener('click', function() {
+        var value = $('#plan .menu .item.active').attr('value');
         if (marker.getAnimation() === null) {
-          console.log(history_details[i]);
 					marker.setAnimation(google.maps.Animation.BOUNCE);
-					if (last_marker !== undefined) {
-            markers[last_marker].setAnimation(null);
-          }
+					if (last_marker !== undefined)
+						markers[last_marker].setAnimation(null);
 					last_marker = i;
 				}
-        var contentString = '1';
-
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
-
-        infowindow.open(map, marker);
+        last_marker = i;
+        if (value == 0) {
+          $('#plan_name').text(history_details[i].name);
+          $('#plan_introduction').text(history_details[i].detail);
+        }
+        else {
+          $('.plan_detail > div[value=' + value + '] .title[value=' + i + ']').click();
+        }
 			});
     });
+    $('#plan .menu .item:first').click();
+    $('.ui.accordion').accordion();
 	});
+
+  function clear_markers() {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+    }
+  }
+
+  function show_all_markers() {
+    clear_markers();
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  }
+
+  function show_markers(marker_place) {
+    clear_markers();
+    marker_place.forEach(function(val, key) {
+      markers[val].setMap(map);
+    });
+  }
+
+  var planA = new google.maps.Polyline({
+    path: [ {lat: 24.123328, lng: 120.675033},
+            {lat: 24.122604, lng: 120.675016},
+            {lat: 24.122643, lng: 120.673606}],
+    strokeColor: '#FDAC61'
+  });
+  var planB = new google.maps.Polyline({
+    path: [{lat: 24.122578, lng: 120.673494}, {lat: 24.123263, lng: 120.675744}],
+    strokeColor: '#FDAC61'
+  });
+  var planC = new google.maps.Polyline({
+    path: [{lat: 24.122578, lng: 120.673494}, {lat: 24.123263, lng: 120.675744}],
+    strokeColor: '#FDAC61'
+  });
+
+  // 監聽點選路線目錄事件
+  $('#plan .menu .item').click(function() {
+  	var val = $(this).attr('value');
+  	click_menu(val);
+    if (val == 1) {
+      draw_plan('A');
+      show_markers(plan_place[0]);
+    }
+    else if (val == 2) {
+      draw_plan('B');
+      show_markers(plan_place[1]);
+    }
+    else if (val == 3) {
+      draw_plan('C');
+      show_markers(plan_place[2]);
+    }
+    else if (val == 0) {
+      clear_all_line();
+      show_all_markers();
+    }
+  });
+
+  // 點選不同路線目錄
+  function click_menu(val) {
+  	$('#plan .menu .item.active').removeClass('active');
+  	$('#plan .menu .item[value=' + val + ']').addClass('active');
+
+    $('.plan_detail > div').hide();
+		$('.plan_detail > div[value=' + val + ']').show();
+  }
+
+  function draw_plan(which) {
+    clear_all_line();
+    switch (which) {
+      case 'A':
+        planA.setMap(map);
+        break;
+      case 'B':
+        planB.setMap(map);
+        break;
+      case 'C':
+        planC.setMap(map);
+        break;
+    }
+  }
+  function clear_all_line() {
+    planA.setMap(null);
+    planB.setMap(null);
+    planC.setMap(null);
+  }
+
+  $('.plan_detail .title').click(function(){
+    var val = $(this).attr('value');
+    click_name(val);
+  });
+  function click_name(val) {
+    if (markers[val].getAnimation() === null) {
+  		markers[val].setAnimation(google.maps.Animation.BOUNCE);
+  		if (last_marker !== undefined)
+  			markers[last_marker].setAnimation(null);
+  	}
+    last_marker = val;
+  }
 };
