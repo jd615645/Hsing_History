@@ -23,6 +23,7 @@ function initMap() {
           introduction = input_data['gsx$introduction']['$t'],
           detail = input_data['gsx$detail']['$t'],
           location = input_data['gsx$location']['$t'];
+          img = input_data['gsx$img']['$t'];
       markers.push(new google.maps.Marker({
         position: {lat: lat, lng: lng},
         map: map,
@@ -33,6 +34,7 @@ function initMap() {
         introduction: introduction,
         detail: detail,
         location: location,
+        img: img
       });
     });
 
@@ -40,15 +42,16 @@ function initMap() {
 			marker.addListener('click', function() {
         var value = $('#plan .menu .item.active').attr('value');
         if (marker.getAnimation() === null) {
-					marker.setAnimation(google.maps.Animation.BOUNCE);
-					if (last_marker !== undefined)
-						markers[last_marker].setAnimation(null);
-					last_marker = i;
-				}
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+          if (last_marker !== undefined)
+            markers[last_marker].setAnimation(null);
+          last_marker = i;
+        }
         last_marker = i;
+        change_pic(i);
         if (value == 0) {
           $('#plan_name').text(history_details[i].name);
-          $('#plan_introduction').text(history_details[i].detail);
+          $('#plan-introduction').text(history_details[i].detail);
         }
         else {
           $('.plan_detail > div[value=' + value + '] .title[value=' + i + ']').click();
@@ -77,6 +80,12 @@ function initMap() {
     marker_place.forEach(function(val, key) {
       markers[val].setMap(map);
     });
+  }
+
+  function change_pic(val) {
+    $('.preview_img').show();
+    $('.preview_img img').attr('src', history_details[val].img + '.jpg');
+    $('.ui.modal img').attr('src', history_details[val].img + '.jpg');
   }
 
   var planA = new google.maps.Polyline({
@@ -118,6 +127,7 @@ function initMap() {
 
   // 點選不同路線目錄
   function click_menu(val) {
+    $('.preview_img').hide();
   	$('#plan .menu .item.active').removeClass('active');
   	$('#plan .menu .item[value=' + val + ']').addClass('active');
 
@@ -144,10 +154,11 @@ function initMap() {
     planB.setMap(null);
     planC.setMap(null);
   }
-
+  
   $('.plan_detail .title').click(function(){
     var val = $(this).attr('value');
     click_name(val);
+    change_pic(val);
   });
   function click_name(val) {
     if (markers[val].getAnimation() === null) {
@@ -157,4 +168,11 @@ function initMap() {
   	}
     last_marker = val;
   }
+  $('.preview_img img').click(function() {
+    $('.ui.modal').modal('show');
+  });
+  $('.ui.modal i.close').click(function() {
+    $('.ui.modal').modal('hide');
+  });
+  $('.preview_img').hide();
 };

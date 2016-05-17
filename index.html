@@ -12,7 +12,7 @@
 
   </head>
   <body>
-    <div class="ui stackable grid container" id="map_top">
+    <div class="ui stackable grid container" id="map-top">
 			<div class="eleven wide column">
 				<div class="ui segment google_map">
 					<div id="map-canvas"></div>
@@ -32,13 +32,17 @@
           <a class="item" value="3">
             路線C
           </a>
-
         </div>
+        
+        <div class="preview_img">
+          <img src="./img/1.jpg">
+        </div>
+        
         <div class="plan_detail">
           <div value="0">
             <p>景點：<span id="plan_name">(請點選左側景點)</span></p>
             <p>介紹：</p>
-            <p id="plan_introduction"></p>
+            <p id="plan-introduction"></p>
           </div>
           <div value="1">
             <div class="ui accordion">
@@ -108,6 +112,12 @@
         </div>
 			</div>
 		</div>
+    <div class="ui modal">
+      <div class="content">
+        <p><i class="link close icon"></i></p>
+        <img src="./img/1.jpg" style="width: 100%">
+      </div>
+    </div>
     <script type="text/javascript" src="//code.jquery.com/jquery-2.2.0.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
