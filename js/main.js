@@ -84,8 +84,8 @@ function initMap() {
 
   function change_pic(val) {
     $('.preview_img').show();
-    $('.preview_img img').attr('src', history_details[val].img + '.jpg');
-    $('.ui.modal img').attr('src', history_details[val].img + '.jpg');
+    $('.preview_img img').attr('src', './img/' + i + '.jpg');
+    $('.ui.modal img').attr('src', './img/' + i + '.jpg');
   }
 
   var planA = new google.maps.Polyline({
