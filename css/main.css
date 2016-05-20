@@ -8,13 +8,17 @@ html, body {
 }
 .google_map {
 	height: 600px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
 }
 #map-canvas {
 	height: 100%;
 	width: 100%;
 }
 #map-top {
-	padding-top: 100px;
+  margin: 10px 30px;
 }
 
 a, .title, p {
