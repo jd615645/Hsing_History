@@ -39,7 +39,7 @@ function initMap() {
     });
 
     markers.forEach(function(marker, i){
-			marker.addListener('click', function() {
+      marker.addListener('click', function() {
         var value = $('#plan .menu .item.active').attr('value');
         if (marker.getAnimation() === null) {
           marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -51,16 +51,19 @@ function initMap() {
         change_pic(i);
         if (value == 0) {
           $('#plan_name').text(history_details[i].name);
-          $('#plan-introduction').text(history_details[i].detail);
+          if (history_details[i].introduction != '') 
+            $('#plan-introduction').text(history_details[i].introduction);
+          else
+            $('#plan-introduction').text(history_details[i].detail);
         }
         else {
           $('.plan_detail > div[value=' + value + '] .title[value=' + i + ']').click();
         }
-			});
+      });
     });
     $('#plan .menu .item:first').click();
     $('.ui.accordion').accordion();
-	});
+  });
 
   function clear_markers() {
     for (var i = 0; i < markers.length; i++) {
@@ -105,8 +108,8 @@ function initMap() {
 
   // 監聽點選路線目錄事件
   $('#plan .menu .item').click(function() {
-  	var val = $(this).attr('value');
-  	click_menu(val);
+    var val = $(this).attr('value');
+    click_menu(val);
     if (val == 1) {
       draw_plan('A');
       show_markers(plan_place[0]);
@@ -128,11 +131,11 @@ function initMap() {
   // 點選不同路線目錄
   function click_menu(val) {
     $('.preview_img').hide();
-  	$('#plan .menu .item.active').removeClass('active');
-  	$('#plan .menu .item[value=' + val + ']').addClass('active');
+    $('#plan .menu .item.active').removeClass('active');
+    $('#plan .menu .item[value=' + val + ']').addClass('active');
 
     $('.plan_detail > div').hide();
-		$('.plan_detail > div[value=' + val + ']').show();
+    $('.plan_detail > div[value=' + val + ']').show();
   }
 
   function draw_plan(which) {
@@ -162,10 +165,10 @@ function initMap() {
   });
   function click_name(val) {
     if (markers[val].getAnimation() === null) {
-  		markers[val].setAnimation(google.maps.Animation.BOUNCE);
-  		if (last_marker !== undefined)
-  			markers[last_marker].setAnimation(null);
-  	}
+      markers[val].setAnimation(google.maps.Animation.BOUNCE);
+      if (last_marker !== undefined)
+        markers[last_marker].setAnimation(null);
+    }
     last_marker = val;
   }
   $('.preview_img img').click(function() {
