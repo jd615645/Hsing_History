@@ -45,7 +45,7 @@ function initMap() {
           marker.setAnimation(google.maps.Animation.BOUNCE);
           if (last_marker !== undefined)
             markers[last_marker].setAnimation(null);
-          last_marker = i;
+          // last_marker = i;
         }
         last_marker = i;
         change_pic(i);
