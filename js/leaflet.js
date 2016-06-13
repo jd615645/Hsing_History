@@ -151,19 +151,19 @@ jQuery(document).ready(function($) {
 
     if (val == 1) {
       clear_markers();
-      draw_plan('A');
+      // draw_plan('A');
       show_markers(plan_place[0]);
     }
     else if (val == 2) {
-      draw_plan('B');
+      // draw_plan('B');
       show_markers(plan_place[1]);
     }
     else if (val == 3) {
-      draw_plan('C');
+      // draw_plan('C');
       show_markers(plan_place[2]);
     }
     else if (val == 0) {
-      clear_all_line();
+      // clear_all_line();
       show_all_markers();
     }
   });
