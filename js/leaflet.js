@@ -13,21 +13,6 @@ jQuery(document).ready(function($) {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
-  
-  var pointA = new L.LatLng(24.122578, 120.673494);
-  var pointB = new L.LatLng(24.123263, 120.675744);
-  var pointList = [pointA, pointB];
-
-  var firstpolyline = new L.Polyline(pointList, {
-  color: 'red',
-  weight: 3,
-  opacity: 0.5,
-  smoothFactor: 1
-
-  });
-  firstpolyline.addTo(map);
-
-
   $.getJSON(url, function(data) {
     var input = data.feed.entry;
 
@@ -151,6 +136,13 @@ jQuery(document).ready(function($) {
     $('.ui.modal img').attr('src', history_details[val].img + '.jpg');
   }
 
+  var planA = [L.polyline([[24.123328,120.675033],[24.122604,120.675016]], { color: 'red' }),
+               L.polyline([[24.122604,120.675016],[24.122643,120.673606]], { color: 'red' }) ];
+  planA = L.layerGroup(planA);
+  var planB = [L.polyline([[24.122578,120.673494],[24.123263,120.675744]], { color: 'red' })];
+  planB = L.layerGroup(planB);
+  var planC = [L.polyline([[24.122578,120.673494],[24.123263,120.675]], { color: 'red' })];
+  planC = L.layerGroup(planC);
   
   // 監聽點選路線目錄事件
   $('#plan .menu .item').click(function() {
@@ -159,19 +151,19 @@ jQuery(document).ready(function($) {
 
     if (val == 1) {
       clear_markers();
-      // draw_plan('A');
+      draw_plan('A');
       show_markers(plan_place[0]);
     }
     else if (val == 2) {
-      // draw_plan('B');
+      draw_plan('B');
       show_markers(plan_place[1]);
     }
     else if (val == 3) {
-      // draw_plan('C');
+      draw_plan('C');
       show_markers(plan_place[2]);
     }
     else if (val == 0) {
-      // clear_all_line();
+      clear_all_line();
       show_all_markers();
     }
   });
@@ -186,25 +178,36 @@ jQuery(document).ready(function($) {
     $('.plan_detail > div[value=' + val + ']').show();
   }
 
-  // function draw_plan(which) {
-  //   clear_all_line();
-  //   switch (which) {
-  //     case 'A':
-  //       planA.setMap(map);
-  //       break;
-  //     case 'B':
-  //       planB.setMap(map);
-  //       break;
-  //     case 'C':
-  //       planC.setMap(map);
-  //       break;
-  //   }
-  // }
-  // function clear_all_line() {
-  //   planA.setMap(null);
-  //   planB.setMap(null);
-  //   planC.setMap(null);
-  // }
+  // var polylineArray = [
+  //   L.polyline([[24.123328,120.675033],[24.122604,120.675016]], { color: 'red' }),
+  //   L.polyline([[24.122604,120.675016],[24.122643,120.673606]], { color: 'red' })
+  // ];
+
+  // var polylines = L.layerGroup(polylineArray);
+
+  // // Add all polylines to the map
+  // polylines.addTo(map);
+
+
+  function draw_plan(which) {
+    clear_all_line();
+    switch (which) {
+      case 'A':
+        planA.addTo(map);
+        break;
+      case 'B':
+        planB.addTo(map);
+        break;
+      case 'C':
+        planC.addTo(map);
+        break;
+    }
+  }
+  function clear_all_line() {
+    map.removeLayer(planA);
+    map.removeLayer(planB);
+    map.removeLayer(planC);
+  }
   
   $('.plan_detail .title').click(function(){
     var val = $(this).attr('value');
