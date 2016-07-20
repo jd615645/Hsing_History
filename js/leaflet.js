@@ -3,10 +3,10 @@ jQuery(document).ready(function($) {
   var url = 'https://spreadsheets.google.com/feeds/list/' + sheet_src + '/1/public/values?alt=json';
   var map = L.map('map-canvas').setView([24.121468, 120.675867], 17);
 
-  // var markers = [];
   window.markers = [];
+
   var history_details = [];
-  var plan_place = [[4, 6, 10, 0, 1], [1, 2, 3, 0, 5], [4, 6, 10, 0, 1]];
+  var plan_place = [[4, 13, 11, 5, 15], [12, 8, 10, 9, 18], [1, 0, 2, 3, 17, 7]];
   var last_marker;
 
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
           detail = input_data['gsx$detail']['$t'],
           location = input_data['gsx$location']['$t'];
           img = input_data['gsx$img']['$t'];
-      
+
       history_details.push({
         name: name,
         introduction: introduction,
@@ -123,6 +123,7 @@ jQuery(document).ready(function($) {
   function show_markers(marker_place) {
     clear_markers();
     marker_place.forEach(function(val, key) {
+      console.log(val);
       if (markers[val].isBouncing()) {
         markers[val].stopBouncing();
       }
@@ -143,7 +144,7 @@ jQuery(document).ready(function($) {
   planB = L.layerGroup(planB);
   var planC = [L.polyline([[24.122578,120.673494],[24.123263,120.675]], { color: 'red' })];
   planC = L.layerGroup(planC);
-  
+
   // 監聽點選路線目錄事件
   $('#plan .menu .item').click(function() {
     var val = $(this).attr('value');
@@ -185,8 +186,8 @@ jQuery(document).ready(function($) {
 
   // var polylines = L.layerGroup(polylineArray);
 
-  // // Add all polylines to the map
-  // polylines.addTo(map);
+  // Add all polylines to the map
+  polylines.addTo(map);
 
 
   function draw_plan(which) {
@@ -208,7 +209,7 @@ jQuery(document).ready(function($) {
     map.removeLayer(planB);
     map.removeLayer(planC);
   }
-  
+
   $('.plan_detail .title').click(function(){
     var val = $(this).attr('value');
     click_name(val);
