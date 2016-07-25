@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
   var url = 'https://spreadsheets.google.com/feeds/list/' + sheet_src + '/1/public/values?alt=json';
   var map = L.map('map-canvas').setView([24.121468, 120.675867], 17);
 
-  window.markers = [];
+  var markers = [];
 
   var history_details = [];
   var plan_place = [[4, 13, 11, 5, 15], [12, 8, 10, 9, 18], [1, 0, 2, 3, 17, 7]];
@@ -192,11 +192,11 @@ jQuery(document).ready(function($) {
     var $detail = $('.plan_detail .accordion');
     $detail.empty();
     plan_place[plan-1].forEach(function(val) {
-
       var text = history_details[val].introduction;
       if (text == '') {
         text = history_details[val].detail;
       }
+
       $detail.append('<div class="title" value="' + val + '"><i class="dropdown icon"></i>' + history_details[val].name + '</div><div class="content"><p class="transition hidden">' + text + '</p></div>');
     })
   }
