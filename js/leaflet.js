@@ -115,13 +115,8 @@ jQuery(document).ready(function($) {
   }
 
   function show_markers(marker_place) {
-    markers.forEach(function(marker, i) {
-      if(marker_place.indexOf(i) != -1) {
-        mapmarker.addLayer(marker);
-      }
-      else {
-        mapmarker.removeLayer(marker);
-      }
+    marker_place.forEach(function(key, val) {
+      mapmarker.addLayer(markers[key]);
     });
   }
 
