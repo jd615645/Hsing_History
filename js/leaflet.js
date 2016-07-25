@@ -106,14 +106,12 @@ jQuery(document).ready(function($) {
       mapmarker.removeLayer(marker);
     });
   }
-
   function show_all_markers() {
     L.Marker.stopAllBouncingMarkers();
     markers.forEach(function(marker, i) {
       mapmarker.addLayer(marker);
     });
   }
-
   function show_markers(marker_place) {
     marker_place.forEach(function(key, val) {
       mapmarker.addLayer(markers[key]);
@@ -136,6 +134,16 @@ jQuery(document).ready(function($) {
   // planB = L.layerGroup(planB);
   // var planC = [L.polyline([[24.122578,120.673494],[24.123263,120.675]], { color: 'red' })];
   // planC = L.layerGroup(planC);
+
+  // var polylineArray = [
+  //   L.polyline([[24.123328,120.675033],[24.122604,120.675016]], { color: 'red' }),
+  //   L.polyline([[24.122604,120.675016],[24.122643,120.673606]], { color: 'red' })
+  // ];
+
+  // var polylines = L.layerGroup(polylineArray);
+
+  // Add all polylines to the map
+  // polylines.addTo(map);
 
   // 監聽點選路線目錄事件
   $('#plan .menu .item').click(function() {
@@ -169,47 +177,56 @@ jQuery(document).ready(function($) {
     $('.preview_img').hide();
     $('#plan .menu .item.active').removeClass('active');
     $('#plan .menu .item[value=' + val + ']').addClass('active');
-
-    $('.plan_detail > div').hide();
-    $('.plan_detail > div[value=' + val + ']').show();
-  }
-
-  // var polylineArray = [
-  //   L.polyline([[24.123328,120.675033],[24.122604,120.675016]], { color: 'red' }),
-  //   L.polyline([[24.122604,120.675016],[24.122643,120.673606]], { color: 'red' })
-  // ];
-
-  // var polylines = L.layerGroup(polylineArray);
-
-  // Add all polylines to the map
-  // polylines.addTo(map);
-
-
-  function draw_plan(which) {
-    clear_all_line();
-    switch (which) {
-      case 'A':
-        planA.addTo(map);
-        break;
-      case 'B':
-        planB.addTo(map);
-        break;
-      case 'C':
-        planC.addTo(map);
-        break;
+    if (val == 0) {
+      $('.plan_detail > div').hide();
+      $('.plan_detail > div[value=0]').show();
+    }
+    else {
+      $('.plan_detail > div').hide();
+      $('.plan_detail > div[value=1]').show();
+      showdetail(val);
     }
   }
-  function clear_all_line() {
-    map.removeLayer(planA);
-    map.removeLayer(planB);
-    map.removeLayer(planC);
+
+  function showdetail(plan) {
+    var $detail = $('.plan_detail .accordion');
+    $detail.empty();
+    plan_place[plan-1].forEach(function(val) {
+
+      var text = history_details[val].introduction;
+      if (text == '') {
+        text = history_details[val].detail;
+      }
+      $detail.append('<div class="title" value="' + val + '"><i class="dropdown icon"></i>' + history_details[val].name + '</div><div class="content"><p class="transition hidden">' + text + '</p></div>');
+    })
   }
 
-  $('.plan_detail .title').click(function(){
+  // function draw_plan(which) {
+  //   clear_all_line();
+  //   switch (which) {
+  //     case 'A':
+  //       planA.addTo(map);
+  //       break;
+  //     case 'B':
+  //       planB.addTo(map);
+  //       break;
+  //     case 'C':
+  //       planC.addTo(map);
+  //       break;
+  //   }
+  // }
+  // function clear_all_line() {
+  //   map.removeLayer(planA);
+  //   map.removeLayer(planB);
+  //   map.removeLayer(planC);
+  // }
+
+  $('.plan_detail').on('click', '.title', function() {
     var val = $(this).attr('value');
     click_name(val);
     change_pic(val);
   });
+
   function click_name(val) {
     if (!markers[val].isBouncing()) {
       markers[val].bounce();
