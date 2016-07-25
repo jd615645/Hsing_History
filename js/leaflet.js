@@ -8,6 +8,7 @@ jQuery(document).ready(function($) {
   var history_details = [];
   var plan_place = [[4, 13, 11, 5, 15], [12, 8, 10, 9, 18], [1, 0, 2, 3, 17, 7]];
   var last_marker;
+  var mapmarker = new L.FeatureGroup();
 
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -15,6 +16,7 @@ jQuery(document).ready(function($) {
 
   $.getJSON(url, function(data) {
     var input = data.feed.entry;
+    var num = 0;
 
     input.forEach(function(input_data, i) {
       var lat = Number(input_data['gsx$lat']['$t']),
@@ -60,11 +62,14 @@ jQuery(document).ready(function($) {
              $('.plan_detail > div[value=' + value + '] .title[value=' + i + ']').click();
            }
          })
-         .addTo(map)
       );
-      $('#plan .menu .item:first').click();
-      $('.ui.accordion').accordion();
+      mapmarker.addLayer(markers[num++]);
     });
+
+    map.addLayer(mapmarker);
+
+    $('#plan .menu .item:first').click();
+    $('.ui.accordion').accordion();
 
     // markers.forEach(function(marker, i) {
     //   marker.on('click', function() {
@@ -96,54 +101,46 @@ jQuery(document).ready(function($) {
   });
 
   function clear_markers() {
+    L.Marker.stopAllBouncingMarkers();
     markers.forEach(function(marker, i) {
-      if (marker.isBouncing()) {
-        marker.stopBouncing();
-      }
-      marker.setOpacity(0);
+      mapmarker.removeLayer(marker);
     });
-    // for (var i = 0; i < markers.length; i++) {
-    //   if (markers[i].isBouncing()) {
-    //     markers[i].stopBouncing();
-    //   }
-    //   markers[i].setOpacity(0);
-    // }
   }
 
   function show_all_markers() {
-    clear_markers();
+    L.Marker.stopAllBouncingMarkers();
     markers.forEach(function(marker, i) {
-      if (marker.isBouncing()) {
-        marker.stopBouncing();
-      }
-      marker.setOpacity(1);
+      mapmarker.addLayer(marker);
     });
   }
 
   function show_markers(marker_place) {
-    clear_markers();
-    marker_place.forEach(function(val, key) {
-      console.log(val);
-      if (markers[val].isBouncing()) {
-        markers[val].stopBouncing();
+    markers.forEach(function(marker, i) {
+      if(marker_place.indexOf(i) != -1) {
+        mapmarker.addLayer(marker);
       }
-      markers[val].setOpacity(1);
+      else {
+        mapmarker.removeLayer(marker);
+      }
     });
   }
 
   function change_pic(val) {
-    $('.preview_img').show();
     $('.preview_img img').attr('src', history_details[val].img + '.jpg');
     $('.ui.modal img').attr('src', history_details[val].img + '.jpg');
+
+    $('img').load(function() {
+      $('.preview_img').show();
+    });
   }
 
-  var planA = [L.polyline([[24.123328,120.675033],[24.122604,120.675016]], { color: 'red' }),
-               L.polyline([[24.122604,120.675016],[24.122643,120.673606]], { color: 'red' }) ];
-  planA = L.layerGroup(planA);
-  var planB = [L.polyline([[24.122578,120.673494],[24.123263,120.675744]], { color: 'red' })];
-  planB = L.layerGroup(planB);
-  var planC = [L.polyline([[24.122578,120.673494],[24.123263,120.675]], { color: 'red' })];
-  planC = L.layerGroup(planC);
+  // var planA = [L.polyline([[24.123328,120.675033],[24.122604,120.675016]], { color: 'red' }),
+  //              L.polyline([[24.122604,120.675016],[24.122643,120.673606]], { color: 'red' }) ];
+  // planA = L.layerGroup(planA);
+  // var planB = [L.polyline([[24.122578,120.673494],[24.123263,120.675744]], { color: 'red' })];
+  // planB = L.layerGroup(planB);
+  // var planC = [L.polyline([[24.122578,120.673494],[24.123263,120.675]], { color: 'red' })];
+  // planC = L.layerGroup(planC);
 
   // 監聽點選路線目錄事件
   $('#plan .menu .item').click(function() {
@@ -151,20 +148,23 @@ jQuery(document).ready(function($) {
     click_menu(val);
 
     if (val == 1) {
-      clear_markers();
       // draw_plan('A');
+      clear_markers();
       show_markers(plan_place[0]);
     }
     else if (val == 2) {
       // draw_plan('B');
+      clear_markers();
       show_markers(plan_place[1]);
     }
     else if (val == 3) {
       // draw_plan('C');
+      clear_markers();
       show_markers(plan_place[2]);
     }
     else if (val == 0) {
       // clear_all_line();
+      clear_markers();
       show_all_markers();
     }
   });
@@ -187,7 +187,7 @@ jQuery(document).ready(function($) {
   // var polylines = L.layerGroup(polylineArray);
 
   // Add all polylines to the map
-  polylines.addTo(map);
+  // polylines.addTo(map);
 
 
   function draw_plan(which) {
@@ -223,6 +223,14 @@ jQuery(document).ready(function($) {
       }
     }
     last_marker = val;
+  }
+  function sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+      if ((new Date().getTime() - start) > milliseconds){
+        break;
+      }
+    }
   }
 
   $('.preview_img img').click(function() {
