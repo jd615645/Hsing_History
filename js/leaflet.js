@@ -121,9 +121,12 @@ jQuery(document).ready(function($) {
   function change_pic(val) {
     $('.preview_img img').attr('src', history_details[val].img + '.jpg');
     $('.ui.modal img').attr('src', history_details[val].img + '.jpg');
-
+    $('.preview_img').show();
+    $('.loading').show();
+    $('.preview_img img').hide();
     $('img').load(function() {
-      $('.preview_img').show();
+      $('.loading').hide();
+      $('.preview_img img').show();
     });
   }
 
@@ -235,14 +238,6 @@ jQuery(document).ready(function($) {
       }
     }
     last_marker = val;
-  }
-  function sleep(milliseconds) {
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-      if ((new Date().getTime() - start) > milliseconds){
-        break;
-      }
-    }
   }
 
   $('.preview_img img').click(function() {

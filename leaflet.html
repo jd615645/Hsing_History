@@ -10,12 +10,11 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/jquery.fullPage.css">
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <link rel="stylesheet" href="./css/main.css">
-
   </head>
   <body>
     <div class="ui stackable grid container" id="map-top">
       <div class="eleven wide column">
-        <div class="ui segment google_map">
+        <div class="ui segment map">
           <div id="map-canvas"></div>
         </div>
       </div>
@@ -34,11 +33,14 @@
             路線C
           </a>
         </div>
-
         <div class="preview_img">
-          <img src="#">
+          <div class="border_radius">
+            <img src="#">
+            <div class="loading">
+              <div class="ui active centered inline loader"></div>
+            </div>
+          </div>
         </div>
-
         <div class="plan_detail">
           <div value="0">
             <p>景點：<span id="plan_name">(請點選左側景點)</span></p>
@@ -52,12 +54,14 @@
         </div>
       </div>
     </div>
+
     <div class="ui modal">
       <div class="content">
         <p><i class="link close icon"></i></p>
         <img src="#" style="width: 100%">
       </div>
     </div>
+
     <script type="text/javascript" src="//code.jquery.com/jquery-2.2.0.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
