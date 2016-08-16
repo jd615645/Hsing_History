@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>校史館導覽</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Sakamoto">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/jquery.fullPage.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="./css/main.css">
+
+  </head>
+  <body>
+    <div class="ui stackable grid container" id="map-top">
+      <div class="eleven wide column">
+        <div class="ui segment map">
+          <div id="map-canvas"></div>
+        </div>
+      </div>
+      <div class="five wide column" id="plan">
+        <div class="ui secondary menu">
+          <a class="item active" value="0">
+            全景點
+          </a>
+          <a class="item" value="1">
+            路線A
+          </a>
+          <a class="item" value="2">
+            路線B
+          </a>
+          <a class="item" value="3">
+            路線C
+          </a>
+        </div>
+
+        <div class="preview_img">
+          <img src="#">
+        </div>
+
+        <div class="plan_detail">
+          <div value="0">
+            <p>景點：<span id="plan_name">(請點選左側景點)</span></p>
+            <p>介紹：</p>
+            <p id="plan-introduction"></p>
+          </div>
+          <div value="1">
+            <div class="ui accordion">
+              <div class="title" value="4">
+                <i class="dropdown icon"></i>
+                校史館
+              </div>
+              <div class="content">
+                <p class="transition hidden">本校早期實施學生工讀輪工制，提供經費讓學生參與學校建設工作，南園的美化工程便是其中之一；南園於未動工前盡是一大片大石頭、草叢、樹木，無法穿越通行的。南園的工程部分均出自學生辛勤的勞力，花草則是向廠商以半買半送的方式取得。南園園區大致成正方形，中心則是圓臺階狀造型，四條人行步道呈現放射狀向周圍延長。在入口紅欄鐵門偏兩側矗立著欖仁樹，再往內走的人行步道旁則是成排的小灌木，穿過灌木叢，可以看到南園的中心造型，正中央是一座以大石頭推砌的小山，小山上雜以花草、藤蔓，周圍再環繞著一圈人行步道，除步道建有階梯外，其餘全是草皮和矮樹叢，從遠處眺望就像半圓形的小屋。南園由四個步道分割成四個區域，分區種植不同花木，分別有馬尾松、竹類、羅漢松、木麻黃和大型植物標本景觀。</p>
+              </div>
+
+              <div class="row">
+                <i class="chevron circle down icon" align="center"></i>
+              </div>
+
+              <div class="title" value="6">
+                <i class="dropdown icon"></i>
+                孔學要旨碑
+              </div>
+              <div class="content">
+                <p class="transition hidden">走進中興大學校門，在第一個路口的右邊，有一塊巨大的石碑，上面以優美的書法刻著《論語‧述而篇》的孔學要旨:「志於道，據而德，依於仁，游於藝」。這塊高3.4公尺、寬4.5公尺的石碑，由中文系校友倪燦溶捐款，再由中文系委託林白設計師規劃放在校園門口。四句孔學要旨分別由當代四位書法名家陳其銓、汪中、杜忠誥、王靜芝揮毫，原件由中文系收藏。孔學要旨碑在民國九十一年(2002)由顏聰校長主持揭碑，從此成為中興大學校園的地標之一，每天提醒路過師生進德修業。</p>
+              </div>
+
+              <div class="row">
+                <i class="chevron circle down icon" align="center"></i>
+              </div>
+
+              <div class="title" value="10">
+                <i class="dropdown icon"></i>
+                行政大樓
+              </div>
+              <div class="content">
+                <p class="transition hidden">民國三十四年(1945)，戰後首任校長周進三接收日治時期「臺灣總督府臺中農林專門學校」，並更名為「臺灣省立臺中農業專科學校」。當時校園土地、建物、設施等為中興大學現址之原始基地，主要建物行政大樓為二層磚造樓房，其餘建物大部分為木造平房。民國三十六年(1947)十二月二十日，司法院長居正蒞校，在行政大樓前空地種植一棵樟樹作為紀念。民國五十五年至六十年(1966-1971)間，省立中興大學後期，舊行政大樓因行政單位增加不敷使用，因而拆除東側的木造宿舍值日室，興建三層樓的建物，供作出版組、保管組、教務處一部分單位使用。該建物至民國七十年(1981)所有行政單位遷移至目前新行政大樓後，改配予植病系使用。另在該三層樓南面之原木造單身宿舍，因老舊而拆除，並改建為福利社餐廳，後改作植病系真菌研究室。當時羅雲平校長提出建造新行政大樓的構想，他認為從全校整體規模來看，須有一座宏偉的行政大樓坐鎮中央，以與中興湖、圖書館相稱。新行政大樓第一期土木工程(一、二層)於民國六十八年(1979)完工，第二期土木工程於民國六十九年(1980)完工，民國七十年(1981)六月所有行政單位全部遷入新大樓辦公。</p>
+              </div>
+
+              <div class="row">
+                <i class="chevron circle down icon" align="center"></i>
+              </div>
+
+              <div class="title" value="0">
+                <i class="dropdown icon"></i>
+                南園石碑
+              </div>
+              <div class="content">
+                <p class="transition hidden">本校早期實施學生工讀輪工制，提供經費讓學生參與學校建設工作，南園的美化工程便是其中之一；南園於未動工前盡是一大片大石頭、草叢、樹木，無法穿越通行的。南園的工程部分均出自學生辛勤的勞力，花草則是向廠商以半買半送的方式取得。南園園區大致成正方形，中心則是圓臺階狀造型，四條人行步道呈現放射狀向周圍延長。在入口紅欄鐵門偏兩側矗立著欖仁樹，再往內走的人行步道旁則是成排的小灌木，穿過灌木叢，可以看到南園的中心造型，正中央是一座以大石頭推砌的小山，小山上雜以花草、藤蔓，周圍再環繞著一圈人行步道，除步道建有階梯外，其餘全是草皮和矮樹叢，從遠處眺望就像半圓形的小屋。南園由四個步道分割成四個區域，分區種植不同花木，分別有馬尾松、竹類、羅漢松、木麻黃和大型植物標本景觀。</p>
+              </div>
+
+              <div class="row">
+                <i class="chevron circle down icon" align="center"></i>
+              </div>
+
+              <div class="title" value="1">
+                <i class="dropdown icon"></i>
+                文學院碑
+              </div>
+              <div class="content">
+                <p class="transition hidden">中興大學文學院成立於民國五十八年（1969），但到了民國七十三年（1984）中文系朱延獻教授向他的老師—臺灣大學臺靜農教授邀稿，將請到的墨寶刻在石碑，成為文學院的地標。</p>
+              </div>
+            </div>
+          </div>
+          <div value="2">
+
+          </div>
+          <div value="3">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui modal">
+      <div class="content">
+        <p><i class="link close icon"></i></p>
+        <img src="#" style="width: 100%">
+      </div>
+    </div>
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.2.0.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlnBXptn-Zoq7AevGcsPj3XjuuKnnBx7g&amp;callback=initMap"></script>
+  </body>
+</html>
