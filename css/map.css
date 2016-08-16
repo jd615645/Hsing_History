@@ -1,0 +1,86 @@
+html, body {
+  font-family:'Roboto', '黑體-繁', '微軟正黑體', sans-serif;
+  font-size: 16px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+h3, a, .title, p {
+  font-family:'Roboto', '黑體-繁', '微軟正黑體', sans-serif !important;
+  color: #808C6C !important;
+}
+#page_loader {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: #E3DFC8;
+}
+.ui.grid, #map-canvas {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+}
+#toolMenu {
+  background-color: #F0F0F0;
+}
+#map {
+  padding: 0px;
+}
+.row {
+  text-align:center;
+}
+#plan .content p{
+  text-align: justify;
+}
+.down.icon {
+  color: #808C6C !important;
+}
+
+.plan_detail {
+  margin-top: 10px;
+}
+
+.preview_img {
+  display: none;
+}
+.preview_img .border_radius {
+  width: 100px;
+  background-color: white;
+  padding: 5px;
+  border-radius: 3px;
+}
+.preview_img img {
+  width: 100%;
+}
+.preview_img i.icon {
+  font-size: 4em;
+}
+.preview_img .loading {
+  background-color: white;
+}
+
+.ui.modal p:first-child {
+  position: fixed;
+  right: 15px;
+}
+.ui.modal .close {
+  color: #111;
+}
+.ui.modal .content {
+  padding: 15px;
+}
+#toolMenu {
+  padding: 15px;
+}
+#toolMenu h3 {
+  margin-bottom: 5px;
+}
+.info {
+  max-width: 300px;
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+}

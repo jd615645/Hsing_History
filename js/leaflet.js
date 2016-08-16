@@ -14,6 +14,23 @@ jQuery(document).ready(function($) {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
+  var info = L.control({'position': 'bottomleft'});
+
+  info.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    div.innerHTML = '<div class="preview_img"><img src="#"><div class="loading"><div class="ui active centered inline loader"></div></div><div class="ui dimmer"><div class="content"><div class="center"><i class="zoom icon"></i></div></div></div></div>';
+    return div;
+  };
+  info.addTo(map);
+
+  // // method that we will use to update the control based on feature properties passed
+  // info.update = function (props) {
+  //     this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+  //         '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+  //         : 'Hover over a state');
+  // };
+
+
   $.getJSON(url, function(data) {
     var input = data.feed.entry;
     var num = 0;
@@ -38,7 +55,7 @@ jQuery(document).ready(function($) {
       markers.push(
         L.marker([lat, lng], {opacity: 1})
          .on('click', function() {
-           var value = $('#plan .menu .item.active').attr('value');
+           var value = $('#plan.menu .item.active').attr('value');
            if (!this.isBouncing()) {
              this.bounce();
              if (last_marker !== undefined) {
@@ -68,36 +85,8 @@ jQuery(document).ready(function($) {
 
     map.addLayer(mapmarker);
 
-    $('#plan .menu .item:first').click();
+    $('#plan.menu .item:first').click();
     $('.ui.accordion').accordion();
-
-    // markers.forEach(function(marker, i) {
-    //   marker.on('click', function() {
-    //     var value = $('#plan .menu .item.active').attr('value');
-    //     if (!this.isBouncing()) {
-    //       marker.bounce();
-    //       if (last_marker !== undefined) {
-    //         markers[last_marker].stopBouncing();
-    //       }
-    //     }
-    //     // 紀錄最後當下點擊的marker
-    //     last_marker = i;
-    //     // 更改導覽照片
-    //     change_pic(i);
-    //     if (value == 0) {
-    //       $('#plan_name').text(history_details[i].name);
-    //       if (history_details[i].introduction != '') {
-    //         $('#plan-introduction').text(history_details[i].introduction);
-    //       }
-    //       else {
-    //         $('#plan-introduction').text(history_details[i].detail);
-    //       }
-    //     }
-    //     else {
-    //       $('.plan_detail > div[value=' + value + '] .title[value=' + i + ']').click();
-    //     }
-    //   })
-    // });
   });
 
   function clear_markers() {
@@ -130,26 +119,8 @@ jQuery(document).ready(function($) {
     });
   }
 
-  // var planA = [L.polyline([[24.123328,120.675033],[24.122604,120.675016]], { color: 'red' }),
-  //              L.polyline([[24.122604,120.675016],[24.122643,120.673606]], { color: 'red' }) ];
-  // planA = L.layerGroup(planA);
-  // var planB = [L.polyline([[24.122578,120.673494],[24.123263,120.675744]], { color: 'red' })];
-  // planB = L.layerGroup(planB);
-  // var planC = [L.polyline([[24.122578,120.673494],[24.123263,120.675]], { color: 'red' })];
-  // planC = L.layerGroup(planC);
-
-  // var polylineArray = [
-  //   L.polyline([[24.123328,120.675033],[24.122604,120.675016]], { color: 'red' }),
-  //   L.polyline([[24.122604,120.675016],[24.122643,120.673606]], { color: 'red' })
-  // ];
-
-  // var polylines = L.layerGroup(polylineArray);
-
-  // Add all polylines to the map
-  // polylines.addTo(map);
-
   // 監聽點選路線目錄事件
-  $('#plan .menu .item').click(function() {
+  $('#plan.menu .item').click(function() {
     var val = $(this).attr('value');
     click_menu(val);
 
@@ -178,8 +149,8 @@ jQuery(document).ready(function($) {
   // 點選不同路線目錄
   function click_menu(val) {
     $('.preview_img').hide();
-    $('#plan .menu .item.active').removeClass('active');
-    $('#plan .menu .item[value=' + val + ']').addClass('active');
+    $('#plan.menu .item.active').removeClass('active');
+    $('#plan.menu .item[value=' + val + ']').addClass('active');
     if (val == 0) {
       $('.plan_detail > div').hide();
       $('.plan_detail > div[value=0]').show();
@@ -204,26 +175,6 @@ jQuery(document).ready(function($) {
     })
   }
 
-  // function draw_plan(which) {
-  //   clear_all_line();
-  //   switch (which) {
-  //     case 'A':
-  //       planA.addTo(map);
-  //       break;
-  //     case 'B':
-  //       planB.addTo(map);
-  //       break;
-  //     case 'C':
-  //       planC.addTo(map);
-  //       break;
-  //   }
-  // }
-  // function clear_all_line() {
-  //   map.removeLayer(planA);
-  //   map.removeLayer(planB);
-  //   map.removeLayer(planC);
-  // }
-
   $('.plan_detail').on('click', '.title', function() {
     var val = $(this).attr('value');
     click_name(val);
@@ -239,8 +190,9 @@ jQuery(document).ready(function($) {
     }
     last_marker = val;
   }
+  $('.preview_img').dimmer({ on: 'hover' });
 
-  $('.preview_img img').click(function() {
+  $('.preview_img').click(function() {
     $('.ui.modal').modal('show');
   });
   $('.ui.modal i.close').click(function() {
