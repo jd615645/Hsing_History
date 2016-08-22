@@ -101,14 +101,22 @@ jQuery(document).ready(function($) {
   }
 
   function change_pic(val) {
+    var owl = $(".owl-carousel").data('owlCarousel');
+    owl.goTo(0);
     $('.preview_img img').attr('src', history_details[val].img[0] + '.jpg');
 
-    // $('.ui.modal img').attr('src', history_details[val].img[0] + '.jpg');
-    // $('.ui.modal #owl-slide').empty();
-
     (history_details[val].img).forEach(function(val, key) {
-      var imgSrc = (val != '' ? val+'.jpg' : '#');
-      $('.ui.modal #owl-slide img[value="' + key + '"]').attr('src', imgSrc);
+      if(val != '') {
+        val = val+'.jpg';
+        $('.owl-page:nth-child(' + (key+1) + ')').show();
+        $('.owl-item:nth-child(' + (key+1) + ')').show();
+      }
+      else {
+        val = '#';
+        $('.owl-page:nth-child(' + (key+1) + ')').hide();
+        $('.owl-item:nth-child(' + (key+1) + ')').hide();
+      }
+      $('.ui.modal #owl-slide img[value="' + key + '"]').attr('src', val);
     })
 
     $('.preview_img').show();
