@@ -51,7 +51,7 @@ function initMap() {
         change_pic(i);
         if (value == 0) {
           $('#plan_name').text(history_details[i].name);
-          if (history_details[i].introduction != '') 
+          if (history_details[i].introduction != '')
             $('#plan-introduction').text(history_details[i].introduction);
           else
             $('#plan-introduction').text(history_details[i].detail);
@@ -157,7 +157,7 @@ function initMap() {
     planB.setMap(null);
     planC.setMap(null);
   }
-  
+
   $('.plan_detail .title').click(function(){
     var val = $(this).attr('value');
     click_name(val);
@@ -171,6 +171,9 @@ function initMap() {
     }
     last_marker = val;
   }
+
+
+
   $('.preview_img img').click(function() {
     $('.ui.modal').modal('show');
   });

@@ -7,7 +7,7 @@ html, body {
 }
 h3, a, .title, p {
   font-family:'Roboto', '黑體-繁', '微軟正黑體', sans-serif !important;
-  color: #808C6C !important;
+  color: #6AC1B8 !important;
 }
 #page_loader {
   width: 100%;
@@ -21,7 +21,7 @@ h3, a, .title, p {
   margin: 0px;
 }
 #toolMenu {
-  background-color: #F0F0F0;
+  background-color: #E1F6F4;
 }
 #map {
   padding: 0px;
@@ -33,9 +33,14 @@ h3, a, .title, p {
   text-align: justify;
 }
 .down.icon {
-  color: #808C6C !important;
+  color: #6AC1B8 !important;
 }
-
+#closeIcon {
+  z-index: 5;
+}
+.owl-buttons {
+  display: none;
+}
 .plan_detail {
   margin-top: 10px;
 }
@@ -79,8 +84,30 @@ h3, a, .title, p {
   max-width: 300px;
   padding: 6px 8px;
   font: 14px/16px Arial, Helvetica, sans-serif;
-  background: white;
+  background: #fff;
   background: rgba(255,255,255,0.8);
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
+}
+.ghost-button[value="0"] {
+  padding: 7px 12px;
+}
+.ghost-button {
+  color: #45ADA8;
+  background: transparent;
+  border-radius: 5px;
+  border: 1px solid #45ADA8;
+  padding: 7px 15px;
+  margin: 6px 0;
+  display: inline-block;
+  text-decoration: none;
+}
+.ghost-button.clicked, .ghost-button:hover, .ghost-button:active {
+  color:#fff;
+  background:#45ADA8;
+}
+#owl-demo .item img{
+  display: block;
+  width: 100%;
+  height: auto;
 }

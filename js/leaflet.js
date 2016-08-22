@@ -23,14 +23,6 @@ jQuery(document).ready(function($) {
   };
   info.addTo(map);
 
-  // // method that we will use to update the control based on feature properties passed
-  // info.update = function (props) {
-  //     this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
-  //         '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
-  //         : 'Hover over a state');
-  // };
-
-
   $.getJSON(url, function(data) {
     var input = data.feed.entry;
     var num = 0;
@@ -55,7 +47,7 @@ jQuery(document).ready(function($) {
       markers.push(
         L.marker([lat, lng], {opacity: 1})
          .on('click', function() {
-           var value = $('#plan.menu .item.active').attr('value');
+           var value = $('#plan .button.clicked').attr('value');
            if (!this.isBouncing()) {
              this.bounce();
              if (last_marker !== undefined) {
@@ -76,8 +68,9 @@ jQuery(document).ready(function($) {
              }
            }
            else {
-             $('.plan_detail > div[value=' + value + '] .title[value=' + i + ']').click();
+             $('.ui.accordion .title[value="' + i + '"]').accordion('open');
            }
+
          })
       );
       mapmarker.addLayer(markers[num++]);
@@ -85,7 +78,7 @@ jQuery(document).ready(function($) {
 
     map.addLayer(mapmarker);
 
-    $('#plan.menu .item:first').click();
+    $('#plan .button:first').click();
     $('.ui.accordion').accordion();
   });
 
@@ -120,22 +113,19 @@ jQuery(document).ready(function($) {
   }
 
   // 監聽點選路線目錄事件
-  $('#plan.menu .item').click(function() {
+  $('#plan .button').click(function() {
     var val = $(this).attr('value');
     click_menu(val);
 
     if (val == 1) {
-      // draw_plan('A');
       clear_markers();
       show_markers(plan_place[0]);
     }
     else if (val == 2) {
-      // draw_plan('B');
       clear_markers();
       show_markers(plan_place[1]);
     }
     else if (val == 3) {
-      // draw_plan('C');
       clear_markers();
       show_markers(plan_place[2]);
     }
@@ -149,8 +139,9 @@ jQuery(document).ready(function($) {
   // 點選不同路線目錄
   function click_menu(val) {
     $('.preview_img').hide();
-    $('#plan.menu .item.active').removeClass('active');
-    $('#plan.menu .item[value=' + val + ']').addClass('active');
+    $('#plan .button.clicked').removeClass('clicked');
+    $('#plan .button[value=' + val + ']').addClass('clicked');
+
     if (val == 0) {
       $('.plan_detail > div').hide();
       $('.plan_detail > div[value=0]').show();
