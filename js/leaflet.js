@@ -5,7 +5,7 @@ jQuery(document).ready(function($) {
 
   var markers = [];
 
-  var history_details = [];
+  window.history_details = [];
   var plan_place = [[4, 13, 11, 5, 15], [12, 8, 10, 9, 18], [1, 0, 2, 3, 17, 7]];
   var last_marker;
   var mapmarker = new L.FeatureGroup();
@@ -34,7 +34,7 @@ jQuery(document).ready(function($) {
           introduction = input_data['gsx$introduction']['$t'],
           detail = input_data['gsx$detail']['$t'],
           location = input_data['gsx$location']['$t'];
-          img = input_data['gsx$img']['$t'];
+          img = input_data['gsx$img']['$t'].split('|');
 
       history_details.push({
         name: name,
@@ -101,8 +101,16 @@ jQuery(document).ready(function($) {
   }
 
   function change_pic(val) {
-    $('.preview_img img').attr('src', history_details[val].img + '.jpg');
-    $('.ui.modal img').attr('src', history_details[val].img + '.jpg');
+    $('.preview_img img').attr('src', history_details[val].img[0] + '.jpg');
+
+    // $('.ui.modal img').attr('src', history_details[val].img[0] + '.jpg');
+    // $('.ui.modal #owl-slide').empty();
+
+    (history_details[val].img).forEach(function(val, key) {
+      var imgSrc = (val != '' ? val+'.jpg' : '#');
+      $('.ui.modal #owl-slide img[value="' + key + '"]').attr('src', imgSrc);
+    })
+
     $('.preview_img').show();
     $('.loading').show();
     $('.preview_img img').hide();
