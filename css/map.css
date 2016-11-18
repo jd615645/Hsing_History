@@ -7,7 +7,7 @@ html, body {
 }
 h3, a, .title, p {
   font-family:'Roboto', '黑體-繁', '微軟正黑體', sans-serif !important;
-  color: #6AC1B8 !important;
+  color: #36506C !important;
 }
 #page_loader {
   width: 100%;
@@ -33,7 +33,7 @@ h3, a, .title, p {
   text-align: justify;
 }
 .down.icon {
-  color: #6AC1B8 !important;
+  color: #36506C !important;
 }
 #closeIcon {
   z-index: 5;
@@ -90,10 +90,10 @@ h3, a, .title, p {
   padding: 7px 12px;
 }
 .ghost-button {
-  color: #45ADA8;
+  color: #007CB9;
   background: transparent;
   border-radius: 5px;
-  border: 1px solid #45ADA8;
+  border: 1px solid #007CB9;
   padding: 7px 15px;
   margin: 6px 0;
   display: inline-block;
@@ -101,8 +101,17 @@ h3, a, .title, p {
 }
 .ghost-button.clicked, .ghost-button:hover, .ghost-button:active {
   color:#fff;
-  background:#45ADA8;
+  background:#007CB9;
 }
+
+/* sidebar */
+.sidebar-pane {
+  padding-top: 0px;
+}
+.sidebar-header, .sidebar-tabs li.active {
+  background-color: #007CB9 !important;
+}
+
 #owl-slide .item img {
   display: block;
   max-width: 100%;

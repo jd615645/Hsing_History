@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
   var sheet_src = '1nDYnBptHmyxWQyxQb-5aiBJemoGYiKtqEeH18O6vjuE';
   var url = 'https://spreadsheets.google.com/feeds/list/' + sheet_src + '/1/public/values?alt=json';
-  var map = L.map('map-canvas').setView([24.121468, 120.675867], 17);
+  var map = L.map('map-canvas').setView([24.121644, 120.673804], 17);
 
   var markers = [];
 
@@ -14,14 +14,7 @@ jQuery(document).ready(function($) {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
-  var info = L.control({'position': 'bottomleft'});
-
-  info.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    div.innerHTML = '<div class="preview_img"><img src="#"><div class="loading"><div class="ui active centered inline loader"></div></div><div class="ui dimmer"><div class="content"><div class="center"><i class="zoom icon"></i></div></div></div></div>';
-    return div;
-  };
-  info.addTo(map);
+  var sidebar = L.control.sidebar('sidebar').addTo(map);
 
   $.getJSON(url, function(data) {
     var input = data.feed.entry;

@@ -7,59 +7,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Sakamoto">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.css">
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="./css/leaflet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
     <link rel="stylesheet" href="./css/map.css">
   </head>
   <body>
 
-    <div class="ui grid">
-      <div class="four wide column" id="toolMenu">
-        <h3>校園史蹟地景導覽</h3>
-        <hr>
-        <div id="plan">
-          <div class="button ghost-button" value="0">全景點</div>
-          <br>
-          <div id="planABC">
-            <div class="button ghost-button" value="1">路線A</div>
+    <div id="sidebar" class="sidebar collapsed">
+      <!-- Nav tabs -->
+      <div class="sidebar-tabs">
+        <ul role="tablist">
+          <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+        </ul>
 
-            <div class="button ghost-button" value="2">路線B</div>
-            <div class="button ghost-button" value="3">路線C</div>
-          </div>
-        </div>
-        <div class="plan_detail">
-          <div value="0">
-            <p>景點：<span id="plan_name">(請點選右側景點)</span></p>
-            <p>介紹：</p>
-            <p id="plan-introduction"></p>
-          </div>
-          <div value="1">
-            <div class="ui accordion">
-            </div>
-          </div>
-        </div>
+        <ul role="tablist">
+          <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+        </ul>
       </div>
-      <div class="twelve wide column" id="map">
-        <div id="map-canvas"></div>
 
-        <div class="ui modal">
-          <div class="content">
-            <p id="closeIcon"><i class="link close icon"></i></p>
+      <!-- Tab panes -->
+      <div class="sidebar-content">
+        <div class="sidebar-pane" id="home">
+          <h1 class="sidebar-header">
+            校園史蹟地景導覽
+            <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+          </h1>
+          <div id="plan">
+            <div class="button ghost-button" value="0">全景點</div>
+            <div id="planABC">
+              <div class="button ghost-button" value="1">路線A</div>
 
-            <div id="owl-slide" class="owl-carousel owl-theme">
-              <div class="item"><img src="#" value="0"></div>
-              <div class="item"><img src="#" value="1"></div>
-              <div class="item"><img src="#" value="2"></div>
+              <div class="button ghost-button" value="2">路線B</div>
+              <div class="button ghost-button" value="3">路線C</div>
             </div>
-
           </div>
+          <div class="plan_detail">
+            <div value="0">
+              <p>景點：<span id="plan_name">(請點選右側景點)</span></p>
+              <p>介紹：</p>
+              <p id="plan-introduction"></p>
+            </div>
+            <div value="1">
+              <div class="ui accordion">
+              </div>
+            </div>
+          </div>
+          <div class="plan_img">
+            <div class="preview_img">
+              <img src="#">
+              <div class="loading">
+                <div class="ui active centered inline loader"></div>
+              </div>
+              <div class="ui dimmer">
+                <div class="content">
+                  <div class="center"><i class="zoom icon"></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-pane" id="settings">
+          <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
         </div>
       </div>
     </div>
 
+    <div id="map-canvas"></div>
+    <div class="ui modal">
+      <div class="content">
+        <p id="closeIcon"><i class="link close icon"></i></p>
 
+        <div id="owl-slide" class="owl-carousel owl-theme">
+          <div class="item"><img src="#" value="0"></div>
+          <div class="item"><img src="#" value="1"></div>
+          <div class="item"><img src="#" value="2"></div>
+        </div>
 
+      </div>
+    </div>
 
     <script src="http://code.jquery.com/jquery-2.2.0.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.js"></script>
@@ -67,6 +96,7 @@
     <script src="http://hosuaby.github.io/Leaflet.SmoothMarkerBouncing/vendor/Leaflet.SmoothMarkerBouncing/leaflet.smoothmarkerbouncing.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js'></script>
     <script src="./js/slide.js"></script>
+    <script src="./js/sidebar.js"></script>
     <script src="./js/leaflet.js"></script>
   </body>
 </html>
