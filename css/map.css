@@ -105,6 +105,9 @@ h3, a, .title, p {
 }
 
 /* sidebar */
+#sidebar {
+  z-index: 1;
+}
 .sidebar-pane {
   padding-top: 0px;
 }

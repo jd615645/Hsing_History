@@ -1,7 +1,12 @@
 jQuery(document).ready(function($) {
   var sheet_src = '1nDYnBptHmyxWQyxQb-5aiBJemoGYiKtqEeH18O6vjuE';
   var url = 'https://spreadsheets.google.com/feeds/list/' + sheet_src + '/1/public/values?alt=json';
-  var map = L.map('map-canvas').setView([24.121644, 120.673804], 17);
+  var map = L.map('map-canvas',
+    {
+      center: [24.121644, 120.673804],
+      zoom: 17,
+      zoomControl:false
+    });
 
   var markers = [];
 
