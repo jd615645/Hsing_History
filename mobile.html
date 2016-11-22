@@ -7,12 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Sakamoto">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"> -->
     <link rel="stylesheet" href="./css/leaflet.css">
     <link rel="stylesheet" href="./css/mobile.css">
+    <link rel="stylesheet" href="./css/L.Control.Window.css" />
   </head>
   <body>
     <div id="map-canvas"></div>
+    <div class="ui page dimmer transition hidden">
+      <div class="ui inverted">
+        <div class="ui loader"></div>
+      </div>
+    </div>
 
     <script src="http://code.jquery.com/jquery-2.2.0.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.js"></script>
@@ -20,5 +26,6 @@
     <script src="http://hosuaby.github.io/Leaflet.SmoothMarkerBouncing/vendor/Leaflet.SmoothMarkerBouncing/leaflet.smoothmarkerbouncing.js"></script>
     <script src="./js/sidebar.js"></script>
     <script src="./js/mobile.js"></script>
+    <script src="./js/L.Control.Window.js"></script>
   </body>
 </html>
