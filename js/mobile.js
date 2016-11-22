@@ -76,7 +76,7 @@ jQuery(document).ready(function($) {
   function clickZoom(e) {
     map.setView(e.target.getLatLng(),17);
   }
-  $('.dimmer').dimmer({
-    closable: false
-  });
+  // $('.dimmer').dimmer({
+  //   closable: false
+  // });
 });
