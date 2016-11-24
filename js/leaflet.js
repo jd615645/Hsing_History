@@ -20,6 +20,7 @@ jQuery(document).ready(function($) {
   }).addTo(map);
 
   var sidebar = L.control.sidebar('sidebar').addTo(map);
+  sidebar.open('home');
 
   $.getJSON(url, function(data) {
     var input = data.feed.entry;
